@@ -6,30 +6,29 @@ sns = boto3.client("sns")
 
 def lambda_handler(event, context):
     record = event["Records"][0]
-    evento = record["eventName"]  # ex: ObjectCreated:Put, ObjectRemoved:Delete
+    events = record["eventName"] 
     bucket = record["s3"]["bucket"]["name"]
-    chave  = urllib.parse.unquote_plus(record["s3"]["object"]["key"])
+    key  = urllib.parse.unquote_plus(record["s3"]["object"]["key"])
 
-    # Exclusão não tem tamanho
-    if "ObjectRemoved" in evento:
-        acao     = "excluído"
-        detalhes = ""
+    if "ObjectRemoved" in events:
+        action     = "deleted"
+        details = ""
     else:
-        acao     = "adicionado"
-        tamanho  = record["s3"]["object"].get("size", 0)
-        detalhes = f"\nTamanho: {tamanho} bytes"
+        action     = "added"
+        size  = record["s3"]["object"].get("size", 0)
+        details = f"\nSize: {size} bytes"
 
-    mensagem = (
-        f"Arquivo {acao} no S3!\n\n"
+    message = (
+        f"File {action} in S3!\n\n"
         f"Bucket: {bucket}\n"
-        f"Arquivo: {chave}"
-        f"{detalhes}"
+        f"File: {key}"
+        f"{details}"
     )
 
     sns.publish(
         TopicArn=os.environ["SNS_TOPIC_ARN"],
-        Subject=f"[S3] Arquivo {acao}: {chave}",
-        Message=mensagem,
+        Subject=f"[S3] File {action}: {key}",
+        Message=message,
     )
 
     return {"statusCode": 200}
