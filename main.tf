@@ -12,14 +12,10 @@ terraform {
     bucket = "terraform-lambda-cicd"
     key    = "terraform.tfstate"
     region = "us-east-1"
+    use_lockfile = true
 
 
   }
-}
-
-module "dynamodb" {
-  source = "./modules/dynamodb"
-  
 }
 
 module "sns" {
