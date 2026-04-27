@@ -28,9 +28,13 @@ jobs:
 
       - name: Planning Terraform
         run: terraform plan
+        env:
+          TF_VAR_email: ${{ secrets.EMAIL }}
 
       - name: Formating Terraform
         run: terraform fmt -recursive
 
       - name: Apply Terraform configuration
         run: terraform apply -auto-approve
+        env:
+          TF_VAR_email: ${{ secrets.EMAIL }}
