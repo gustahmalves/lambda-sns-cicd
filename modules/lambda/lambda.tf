@@ -1,7 +1,7 @@
 data "archive_file" "lambda_zip" {
   type        = "zip"
-  source_file = "C:\\estudos\\terraform\\cicd-lambda\\lambdafunc.py"
-  output_path = "C:\\estudos\\terraform\\cicd-lambda\\lambdafunc.zip"
+  source_file = "${path.root}/lambdafunc.py"
+  output_path = "${path.module}/lambdafunc.zip"
 }
 
 resource "aws_lambda_function" "notifier" {
