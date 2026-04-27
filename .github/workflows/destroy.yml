@@ -32,4 +32,4 @@ jobs:
         if: github.event.inputs.confirm == 'DESTROY'
         run: terraform destroy -auto-approve
         env:
-          TF_VAR_notification_email: ${{ secrets.EMAIL }}
+          TF_VAR_email: ${{ secrets.EMAIL }}
