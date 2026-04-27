@@ -1,0 +1,36 @@
+name: Deploy Lambda + Terraform
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }} 
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Planning Terraform
+        run: terraform plan
+
+      - name: Formating Terraform
+        run: terraform fmt -recursive
+
+      - name: Apply Terraform configuration
+        run: terraform apply -auto-approve
