@@ -32,7 +32,8 @@ Every time a file is **uploaded** or **deleted** from an S3 bucket, a Lambda fun
 
 Both upload and delete events trigger email notifications in real time:
 
-![Working notifications](docs/notifications.png)
+<img width="1379" height="116" alt="image" src="https://github.com/user-attachments/assets/3042487f-633b-4bbe-b993-ab4406c945f5" />
+
 
 ---
 
