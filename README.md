@@ -144,7 +144,7 @@ File   : report.pdf
 | `AWS_ACCESS_KEY_ID` | AWS access key |
 | `AWS_SECRET_ACCESS_KEY` | AWS secret key |
 | `AWS_REGION` | Target region (e.g. `us-east-1`) |
-| `NOTIFICATION_EMAIL` | Email address to receive notifications |
+| `EMAIL` | Email address to receive notifications |
 
 ### Deploy
 
