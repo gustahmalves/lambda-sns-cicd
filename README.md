@@ -1,5 +1,3 @@
-# lambda-sns-cicd
-
 # S3 → Lambda → SNS Email Notifier
 
 Serverless AWS infrastructure built with **Terraform** and deployed automatically via **GitHub Actions CI/CD**.
